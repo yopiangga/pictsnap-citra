@@ -18,7 +18,7 @@ export default function Login() {
     setLoading(true);
 
     await SignIn(data, (res) => {
-      setUser(user);
+      setUser(res);
       setLoading(false);
       Router.push("/");
     });
@@ -27,10 +27,10 @@ export default function Login() {
   return (
     <div className="bg-no-repeat bg-cover bg-center relative">
       {loading ? <Loader /> : ""}
-      <div className="absolute bg-gradient-to-b from-green-500 to-green-400 opacity-75 inset-0 z-0"></div>
+      <div className="absolute bg-gradient-to-b from-white to-gray-50 opacity-100 inset-0 z-0"></div>
       <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
         <div className="flex-col flex  self-center p-10 sm:max-w-5xl xl:max-w-2xl  z-10">
-          <div className="self-start hidden lg:flex flex-col  text-white">
+          <div className="self-start hidden lg:flex flex-col text-gray-900">
             <img src="" className="mb-3" />
             <h1 className="mb-3 font-bold text-5xl">
               Hi 👋 Welcome Back Exhibitor{" "}
@@ -40,10 +40,10 @@ export default function Login() {
         </div>
         <div className="flex justify-center self-center  z-10">
           <form onSubmit={handleSubmit}>
-            <div className="p-12 bg-white mx-auto rounded-2xl w-100 ">
+            <div className="p-12 bg-white shadow-lg mx-auto rounded-2xl w-100 ">
               <div className="mb-4">
                 <h3 className="font-semibold text-2xl text-gray-800">
-                  Sign In{" "}
+                  Sign <span className="text-orange-400">in</span>
                 </h3>
                 <p className="text-gray-500">Please sign in to your account.</p>
               </div>
@@ -53,7 +53,7 @@ export default function Login() {
                     Email
                   </label>
                   <input
-                    className=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
+                    className=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-orange-400"
                     type="email"
                     name="email"
                     value={data?.email}
@@ -66,7 +66,7 @@ export default function Login() {
                     Password
                   </label>
                   <input
-                    className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
+                    className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-orange-400"
                     type="password"
                     name="password"
                     value={data?.password}
@@ -79,7 +79,7 @@ export default function Login() {
                     Event ID
                   </label>
                   <input
-                    className=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
+                    className=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-orange-400"
                     type="text"
                     name="event_id"
                     value={data?.event_id}
@@ -90,7 +90,7 @@ export default function Login() {
                 <div>
                   <button
                     type="submit"
-                    className="w-full flex justify-center bg-green-400  hover:bg-green-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
+                    className="w-full flex justify-center bg-orange-400  hover:bg-orange-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
                   >
                     Sign in
                   </button>
@@ -101,7 +101,7 @@ export default function Login() {
                   Copyright © 2022
                   <a
                     href="https://codepen.io/uidesignhub"
-                    className="text-green hover:text-green-500 "
+                    className="text-orange hover:text-orange-500 "
                   ></a>
                 </span>
               </div>

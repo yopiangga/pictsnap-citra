@@ -77,6 +77,7 @@ export default function Home() {
 
   function handleSubmit() {
     // console.log(base64.result.replace("data:image/jpeg;base64,", ""));
+    if (base64 == null) return;
     setLoading(true);
     axios
       .post("http://127.0.0.1:5000/compare-all-image", {
