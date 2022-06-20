@@ -148,7 +148,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-5 mt-20">
+        <div className="grid grid-cols-3 gap-5 mt-20 mb-8">
           {items.map((item, idx) => {
             return (
               <div key={idx} className="w-full">
