@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { AppContext } from "context/state";
+import Router from "next/router";
+import { useContext } from "react";
 
 export function Navbar({ id }) {
   const items = [
@@ -92,6 +95,9 @@ export function Navbar({ id }) {
 }
 
 export function NavbarDashboard({ title }) {
+  const { user, setUser, token, setToken } = useContext(AppContext);
+  console.log(user);
+
   return (
     <div className="navbar bg-transparent mb-0 rounded-box">
       <div className="flex-1">
@@ -99,7 +105,7 @@ export function NavbarDashboard({ title }) {
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end flex items-center">
-          <h4 className="mr-2">Admin</h4>
+          <h4 className="mr-2">{user?.exhibitor?.name}</h4>
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img src="https://api.lorem.space/image/face?hash=33791" />

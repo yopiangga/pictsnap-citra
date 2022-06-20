@@ -1,18 +1,19 @@
 import LayoutDashboard from "layouts/dashboard";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaUpload } from "react-icons/fa";
+import { AppContext } from "context/state";
+import Router from "next/router";
 
 export default function LogoHeader() {
+  const { user, setUser, token, setToken } = useContext(AppContext);
   const [file1, setFile1] = useState();
   const [imagePreview1, setImagePreview1] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // var user = getAuth().currentUser;
-
-  // useEffect(() => {
-  //   if (user == null) Router.push("/auth/login");
-  // }, []);
+  useEffect(() => {
+    if (user == null) Router.push("/auth/login");
+  }, []);
 
   const handleImageAsFile = (e) => {
     const file = e.target.files[0];
@@ -42,7 +43,14 @@ export default function LogoHeader() {
     }
   };
 
-  function Push() {}
+  async function Push() {
+    await updateTexture(
+      user.email + user.event_id + "header_logo_1",
+      file1,
+      () => setLoading(false),
+      token
+    );
+  }
 
   return (
     <LayoutDashboard menuActive="2" title="Logo Header">

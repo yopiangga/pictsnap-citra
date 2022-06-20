@@ -15,7 +15,7 @@ export function SidebarDashboard({ menuActive }) {
     {
       title: "Dashboard",
       icon: <FiHome />,
-      href: "/dashboard",
+      href: "/",
     },
     {
       title: "Logo",

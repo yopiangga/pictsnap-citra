@@ -1,13 +1,20 @@
 import LayoutDashboard from "layouts/dashboard";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaUpload } from "react-icons/fa";
+import { AppContext } from "context/state";
+import Router from "next/router";
 
 export default function Home() {
+  const { user, setUser, token, setToken } = useContext(AppContext);
   const [items, setItems] = useState([]);
   const [file, setFile] = useState();
   const [base64, setBase64] = useState("");
   const [imagePreview, setImagePreview] = useState(false);
+
+  useEffect(() => {
+    if (user == null) Router.push("/auth/login");
+  }, []);
 
   useEffect(() => {
     axios
@@ -158,7 +165,7 @@ export default function Home() {
                   <div className="p-8 sm:p-9 md:p-7 xl:p-9 text-center">
                     <h3>
                       <a
-                        href="javascript:void(0)"
+                        href=""
                         className="
                           font-semibold
                           text-dark text-xl

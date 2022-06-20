@@ -1,19 +1,21 @@
 import LayoutDashboard from "layouts/dashboard";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaUpload } from "react-icons/fa";
+import { updateTexture } from "services/TextureServices";
+import { AppContext } from "context/state";
+import Router from "next/router";
 
 export default function Logo() {
+  const { user, setUser, token, setToken } = useContext(AppContext);
   const [item, setItem] = useState();
   const [file1, setFile1] = useState();
   const [imagePreview1, setImagePreview1] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // var user = getAuth().currentUser;
-
-  // useEffect(() => {
-  //   if (user == null) Router.push("/auth/login");
-  // }, []);
+  useEffect(() => {
+    if (user == null) Router.push("/auth/login");
+  }, []);
 
   const handleImageAsFile = (e) => {
     const file = e.target.files[0];
@@ -50,7 +52,14 @@ export default function Logo() {
     }
   };
 
-  function Push() {}
+  async function Push() {
+    await updateTexture(
+      user.email + user.event_id + item.index,
+      file1,
+      () => setLoading(false),
+      token
+    );
+  }
 
   return (
     <LayoutDashboard menuActive="4" title="Poster">
@@ -115,8 +124,8 @@ export default function Logo() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
                     >
                       <option selected>Choose a value</option>
-                      <option value="0">Poster 1</option>
-                      <option value="1">Poster 2</option>
+                      <option value="poster_1">Poster 1</option>
+                      <option value="poster_2">Poster 2</option>
                     </select>
 
                     <div className="mt-10">
