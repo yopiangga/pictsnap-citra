@@ -96,7 +96,13 @@ export function Navbar({ id }) {
 
 export function NavbarDashboard({ title }) {
   const { user, setUser, token, setToken } = useContext(AppContext);
-  console.log(user);
+
+  const handleLogout = () => {
+    setUser({});
+    setToken("");
+    localStorage.removeItem("token");
+    Router.push("/auth/login");
+  };
 
   return (
     <div className="navbar bg-transparent mb-0 rounded-box">
@@ -116,7 +122,7 @@ export function NavbarDashboard({ title }) {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Logout</a>
+              <button onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </div>

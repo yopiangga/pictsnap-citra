@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import { AppContext } from "context/state";
 import Router from "next/router";
+import Link from "next/link";
 
 export default function Home() {
   const { user, setUser, token, setToken } = useContext(AppContext);
@@ -18,7 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .post("http://127.0.0.1:5000/get-image")
+      .post("http://127.0.0.1:5000/get-images")
       .then(function (response) {
         setItems(response.data);
         console.log(response);
@@ -55,7 +56,7 @@ export default function Home() {
     setBase64(null);
     setImagePreview(null);
     axios
-      .post("http://127.0.0.1:5000/get-image")
+      .post("http://127.0.0.1:5000/get-images")
       .then(function (response) {
         setItems(response.data);
         // console.log(response);
@@ -153,20 +154,21 @@ export default function Home() {
             return (
               <div key={idx} className="w-full">
                 <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                  {item[2] == null || item[2] == undefined || item[2] == "" ? (
+                  {item[3] == null || item[3] == undefined || item[3] == "" ? (
                     ""
                   ) : (
                     <img
-                      src={`data:image/jpg;base64,${item[2]}`}
+                      // src={`data:image/jpg;base64,${item[2]}`}
+                      src={`${item[3]}`}
                       alt="image"
                       className="w-full"
                     />
                   )}
                   <div className="p-8 sm:p-9 md:p-7 xl:p-9 text-center">
                     <h3>
-                      <a
-                        href=""
-                        className="
+                      <Link href={`/template/${idx}`}>
+                        <a
+                          className="
                           font-semibold
                           text-dark text-xl
                           sm:text-[22px]
@@ -178,9 +180,10 @@ export default function Home() {
                           block
                           hover:text-orange-500
                           "
-                      >
-                        50+ Best creative website themes & templates
-                      </a>
+                        >
+                          {item[4]}
+                        </a>
+                      </Link>
                     </h3>
                     <p className="text-base text-body-color leading-relaxed mb-7">
                       Lorem ipsum dolor sit amet pretium consectetur adipiscing

@@ -2,7 +2,7 @@ import Link from "next/link";
 import {
   FiHome,
   FiBox,
-  FiUser,
+  FiAirplay,
   FiDollarSign,
   FiMessageSquare,
 } from "react-icons/fi";
@@ -43,9 +43,9 @@ export function SidebarDashboard({ menuActive }) {
       href: "/banner",
     },
     {
-      title: "Profile",
-      icon: <FiUser />,
-      href: "/profile",
+      title: "Booth Preview",
+      icon: <FiAirplay />,
+      href: "/booth-preview",
     },
   ];
 

@@ -5,7 +5,7 @@ import { FaUpload } from "react-icons/fa";
 import { AppContext } from "context/state";
 import Router from "next/router";
 
-export default function Profile() {
+export default function BoothPreview() {
   const { user, setUser, token, setToken } = useContext(AppContext);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <LayoutDashboard menuActive="6" title="Profile">
+    <LayoutDashboard menuActive="6" title="Booth Preview">
       <div className="overflow-auto scrollbar-hide h-screen pb-24 px-4 md:px-6">
         <div className="flex flex-col items-center">
           <img
