@@ -7,10 +7,10 @@ import { AppContext } from "context/state";
 import Router from "next/router";
 
 export default function Logo() {
-  const { user, setUser, token, setToken } = useContext(AppContext);
+  const { user, setUser, token, setToken, loading, setLoading } =
+    useContext(AppContext);
   const [file1, setFile1] = useState();
   const [imagePreview1, setImagePreview1] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (user == null) Router.push("/auth/login");

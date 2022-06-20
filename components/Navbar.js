@@ -95,7 +95,8 @@ export function Navbar({ id }) {
 }
 
 export function NavbarDashboard({ title }) {
-  const { user, setUser, token, setToken } = useContext(AppContext);
+  const { user, setUser, token, setToken, loading, setLoading } =
+    useContext(AppContext);
 
   const handleLogout = () => {
     setUser({});

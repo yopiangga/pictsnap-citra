@@ -2,9 +2,11 @@ import { useState, useContext } from "react";
 import Router from "next/router";
 import { SignIn } from "services/AuthServices";
 import { AppContext } from "context/state";
+import { Loader } from "components/Loader";
 
 export default function Login() {
-  const { user, setUser, token, setToken } = useContext(AppContext);
+  const { user, setUser, token, setToken, loading, setLoading } =
+    useContext(AppContext);
   const [data, setData] = useState();
 
   const handleChange = (e) => {
@@ -13,15 +15,18 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     await SignIn(data, (res) => {
       setUser(user);
+      setLoading(false);
       Router.push("/");
     });
   };
 
   return (
     <div className="bg-no-repeat bg-cover bg-center relative">
+      {loading ? <Loader /> : ""}
       <div className="absolute bg-gradient-to-b from-green-500 to-green-400 opacity-75 inset-0 z-0"></div>
       <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
         <div className="flex-col flex  self-center p-10 sm:max-w-5xl xl:max-w-2xl  z-10">

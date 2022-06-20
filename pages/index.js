@@ -7,7 +7,8 @@ import Router from "next/router";
 import Link from "next/link";
 
 export default function Home() {
-  const { user, setUser, token, setToken } = useContext(AppContext);
+  const { user, setUser, token, setToken, loading, setLoading } =
+    useContext(AppContext);
   const [items, setItems] = useState([]);
   const [file, setFile] = useState();
   const [base64, setBase64] = useState("");
@@ -18,6 +19,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .post("http://127.0.0.1:5000/get-images")
       .then(function (response) {
@@ -30,6 +32,7 @@ export default function Home() {
       })
       .then(function () {
         // always executed
+        setLoading(false);
       });
   }, []);
 
@@ -55,6 +58,7 @@ export default function Home() {
     setFile(null);
     setBase64(null);
     setImagePreview(null);
+    setLoading(true);
     axios
       .post("http://127.0.0.1:5000/get-images")
       .then(function (response) {
@@ -67,11 +71,13 @@ export default function Home() {
       })
       .then(function () {
         // always executed
+        setLoading(false);
       });
   }
 
   function handleSubmit() {
     // console.log(base64.result.replace("data:image/jpeg;base64,", ""));
+    setLoading(true);
     axios
       .post("http://127.0.0.1:5000/compare-all-image", {
         image1: base64.result,
@@ -86,6 +92,7 @@ export default function Home() {
       })
       .then(function () {
         // always executed
+        setLoading(false);
       });
   }
 
