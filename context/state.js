@@ -7,6 +7,8 @@ export function AppWrapper({ children }) {
   const [user, setUser] = useState("");
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(true);
+  const apiPy = "http://aisoru.com:5000";
+  const apiPictSnap = "https://api.pictsnap.simhive.com/api";
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -27,7 +29,16 @@ export function AppWrapper({ children }) {
 
   return (
     <AppContext.Provider
-      value={{ user, setUser, token, setToken, loading, setLoading }}
+      value={{
+        apiPy,
+        apiPictSnap,
+        user,
+        setUser,
+        token,
+        setToken,
+        loading,
+        setLoading,
+      }}
     >
       {children}
     </AppContext.Provider>

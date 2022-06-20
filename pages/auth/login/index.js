@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Router from "next/router";
 import { SignIn } from "services/AuthServices";
 import { AppContext } from "context/state";
@@ -8,6 +8,10 @@ export default function Login() {
   const { user, setUser, token, setToken, loading, setLoading } =
     useContext(AppContext);
   const [data, setData] = useState();
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });

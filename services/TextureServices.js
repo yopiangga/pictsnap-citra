@@ -12,7 +12,6 @@ export function updateTexture(file, title, callback, token) {
       },
     })
     .then((res) => {
-      console.log("success");
       callback();
     })
     .catch((err) => {

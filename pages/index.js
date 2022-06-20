@@ -7,8 +7,16 @@ import Router from "next/router";
 import Link from "next/link";
 
 export default function Home() {
-  const { user, setUser, token, setToken, loading, setLoading } =
-    useContext(AppContext);
+  const {
+    apiPy,
+    apiPictSnap,
+    user,
+    setUser,
+    token,
+    setToken,
+    loading,
+    setLoading,
+  } = useContext(AppContext);
   const [items, setItems] = useState([]);
   const [file, setFile] = useState();
   const [base64, setBase64] = useState("");
@@ -21,10 +29,9 @@ export default function Home() {
   useEffect(() => {
     setLoading(true);
     axios
-      .post("http://127.0.0.1:5000/get-images")
+      .post(`${apiPy}/get-images`)
       .then(function (response) {
         setItems(response.data);
-        console.log(response);
       })
       .catch(function (error) {
         // handle error
@@ -60,7 +67,7 @@ export default function Home() {
     setImagePreview(null);
     setLoading(true);
     axios
-      .post("http://127.0.0.1:5000/get-images")
+      .post(`${apiPy}/get-images`)
       .then(function (response) {
         setItems(response.data);
         // console.log(response);
@@ -76,16 +83,14 @@ export default function Home() {
   }
 
   function handleSubmit() {
-    // console.log(base64.result.replace("data:image/jpeg;base64,", ""));
     if (base64 == null) return;
     setLoading(true);
     axios
-      .post("http://127.0.0.1:5000/compare-all-image", {
+      .post(`${apiPy}/compare-all-image`, {
         image1: base64.result,
       })
       .then(function (response) {
         setItems(response.data);
-        console.log(response);
       })
       .catch(function (error) {
         // handle error

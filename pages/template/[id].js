@@ -8,8 +8,16 @@ import { Router, useRouter } from "next/router";
 import { FiDownload, FiHeart } from "react-icons/fi";
 
 export default function TemplateDetail() {
-  const { user, setUser, token, setToken, loading, setLoading } =
-    useContext(AppContext);
+  const {
+    apiPy,
+    apiPictSnap,
+    user,
+    setUser,
+    token,
+    setToken,
+    loading,
+    setLoading,
+  } = useContext(AppContext);
   const [item, setItem] = useState(["", "", "", "", ""]);
   const { id } = useRouter().query;
   useEffect(() => {
@@ -19,10 +27,10 @@ export default function TemplateDetail() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://127.0.0.1:5000/get-image/${id}`)
+      .get(`${apiPy}/get-image/${id}`)
       .then(function (response) {
         setItem(response.data);
-        console.log(response);
+        // console.log(response);
       })
       .catch(function (error) {
         console.log(error);
